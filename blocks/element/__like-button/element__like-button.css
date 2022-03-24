@@ -1,0 +1,9 @@
+.element__like-button {
+  box-sizing: border-box;
+  width: 22px;
+  height: 19px;
+  background-image: url(../../../images/button-like.svg);
+  background-color: inherit;
+  border: none;
+  object-fit: contain;
+}

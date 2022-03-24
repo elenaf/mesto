@@ -1,0 +1,10 @@
+.profile__edit-button {
+  box-sizing: border-box;
+  padding: 0;
+  background-image: url(../../../images/button-edit.svg);
+  background-position: center;
+  background-color: inherit;
+  border: 1px solid #FFFFFF;
+  width: 24px;
+  height: 24px;
+}
