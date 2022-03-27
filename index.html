@@ -8,6 +8,18 @@
 </head>
 <body>
   <div class="page">
+    <div class="popup">
+        <form action="" method="post" class="popup__container">
+          <button class="popup__close-button"></button>
+          <p class="popup__title">Редактировать профиль</p>
+          <fieldset class="popup__user-info">
+            <input type="text" placeholder="Имя" class="popup__input popup__name" name="name" value="Жак-Ив Кусто">
+            <input type="text" placeholder="Род занятий" class="popup__input popup__occupation" name="occupation" value="Исследователь океана">
+          </fieldset>
+          <button type="submit" class="popup__save-button">Сохранить</button>
+        </form>
+    </div>
+
     <header class="header">
       <div class="header__logo"></div>
     </header>
