@@ -9,15 +9,17 @@
 <body>
   <div class="page">
     <div class="popup">
-        <form class="popup__container">
-          <button class="popup__close-button"></button>
-          <p class="popup__title">Редактировать профиль</p>
-          <fieldset class="popup__user-info">
-            <input type="text" placeholder="Имя" class="popup__input popup__name" name="name">
-            <input type="text" placeholder="Род занятий" class="popup__input popup__occupation" name="occupation">
-          </fieldset>
-          <button type="submit" class="popup__save-button">Сохранить</button>
-        </form>
+      <div class="popup__container">
+        <button type="button" class="popup__close-button"></button>
+          <form class="popup__form" name="user-data">
+            <h3 class="popup__title">Редактировать профиль</h3>
+            <fieldset class="popup__fields">
+              <input type="text" placeholder="Имя" class="popup__input popup__input_field_name" name="name" required>
+              <input type="text" placeholder="Род занятий" class="popup__input popup__input_field_occupation" name="occupation" required>
+            </fieldset>
+            <button type="submit" class="popup__save-button">Сохранить</button>
+          </form>
+      </div>
     </div>
 
     <header class="header">
@@ -33,62 +35,63 @@
               <h1 class="profile__person-text profile__title">Жак-Ив Кусто</h1>
               <p class="profile__person-text profile__subtitle">Исследователь океана</p>
             </div>
-            <button class="profile__edit-button"></button>
+            <button type="button" class="profile__edit-button"></button>
           </div>
         </div>
-        <button class="profile__add-button"></button>
+        <button type="button" class="profile__add-button"></button>
       </section>
 
-      <div class="elements">
+      <section class="elements">
         <div class="element">
           <img src="images/grid-karachaevsk.jpg" class="element__image" alt="Карачаевск">
           <div class="element__caption">
-            <p class="element__place-name">Карачаевск</p>
-            <button class="element__like-button"></button>
+            <h2 class="element__place-name">Карачаевск</h2>
+            <button type="button" class="element__like-button"></button>
           </div>
         </div>
         <div class="element">
           <img src="images/grid-dombay.jpg" class="element__image" alt="Домбай">
           <div class="element__caption">
-            <p class="element__place-name">Домбай</p>
-            <button class="element__like-button"></button>
+            <h2 class="element__place-name">Домбай</h2>
+            <button type="button" class="element__like-button"></button>
           </div>
         </div>
         <div class="element">
           <img src="images/grid-elbrus.jpg" class="element__image" alt="Эльбрус">
           <div class="element__caption">
-            <p class="element__place-name">Эльбрус</p>
-            <button class="element__like-button"></button>
+            <h2 class="element__place-name">Эльбрус</h2>
+            <button type="button" class="element__like-button"></button>
           </div>
         </div>
         <div class="element">
           <img src="images/grid-elista.jpg" class="element__image" alt="Элиста">
           <div class="element__caption">
-            <p class="element__place-name">Элиста</p>
-            <button class="element__like-button"></button>
+            <h2 class="element__place-name">Элиста</h2>
+            <button type="button" class="element__like-button"></button>
           </div>
         </div>
         <div class="element">
           <img src="images/grid-ingushetija.jpg" class="element__image" alt="Ингушетия">
           <div class="element__caption">
-            <p class="element__place-name">Ингушетия</p>
-            <button class="element__like-button"></button>
+            <h2 class="element__place-name">Ингушетия</h2>
+            <button type="button" class="element__like-button"></button>
           </div>
         </div>
         <div class="element">
           <img src="images/grid-kandalaksha.jpg" class="element__image" alt="Кандалакша">
           <div class="element__caption">
-            <p class="element__place-name">Кандалакша</p>
-            <button class="element__like-button"></button>
+            <h2 class="element__place-name">Кандалакша</h2>
+            <button type="button" class="element__like-button"></button>
           </div>
         </div>
-      </div>
+      </section>
     </main>
 
     <footer class="footer">
       <p class="footer__copyright">&copy;&nbsp;2022 Mesto Russia</p>
     </footer>
   </div>
-  <script src="script.js"></script>
+
+  <script src="scripts/index.js"></script>
 </body>
 </html>

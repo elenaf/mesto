@@ -4,14 +4,15 @@
 @import url(../blocks/page/page.css);
 
 @import url(../blocks/popup/popup.css);
-@import url(../blocks/popup/__opened/popup__opened.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
-@import url(../blocks/popup/__user-info/popup__user-info.css);
+@import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__fields/popup__fields.css);
 @import url(../blocks/popup/__input/popup__input.css);
-@import url(../blocks/popup/__name/popup__name.css);
-@import url(../blocks/popup/__occupation/popup__occupation.css);
+@import url(../blocks/popup/__input/_field/popup__input_field_name.css);
+@import url(../blocks/popup/__input/_field/popup__input_field_occupation.css);
 @import url(../blocks/popup/__save-button/popup__save-button.css);
 
 @import url(../blocks/header/header.css);
