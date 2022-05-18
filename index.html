@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="page">
-    <div class="popup">
+    <div class="popup popup__profile-edit">
       <div class="popup__container">
         <button type="button" class="popup__close-button"></button>
           <form class="popup__form" name="user-data">
@@ -18,6 +18,20 @@
               <input type="text" placeholder="Род занятий" class="popup__input popup__input_field_occupation" name="occupation" required>
             </fieldset>
             <button type="submit" class="popup__save-button">Сохранить</button>
+          </form>
+      </div>
+    </div>
+
+    <div class="popup popup__place-add">
+      <div class="popup__container">
+        <button type="button" class="popup__close-button"></button>
+          <form class="popup__form" name="new-item">
+            <h2 class="popup__title">Новое место</h2>
+            <fieldset class="popup__fields">
+              <input type="text" placeholder="Название" class="popup__input popup__input_field_place-name" name="place-name" required>
+              <input type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_field_picture-link" name="picture-link" required>
+            </fieldset>
+            <button type="submit" class="popup__save-button">Создать</button>
           </form>
       </div>
     </div>
@@ -41,49 +55,9 @@
         <button type="button" class="profile__add-button"></button>
       </section>
 
+
       <section class="elements">
-        <div class="element">
-          <img src="images/grid-karachaevsk.jpg" class="element__image" alt="Карачаевск">
-          <div class="element__caption">
-            <h2 class="element__place-name">Карачаевск</h2>
-            <button type="button" class="element__like-button"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img src="images/grid-dombay.jpg" class="element__image" alt="Домбай">
-          <div class="element__caption">
-            <h2 class="element__place-name">Домбай</h2>
-            <button type="button" class="element__like-button"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img src="images/grid-elbrus.jpg" class="element__image" alt="Эльбрус">
-          <div class="element__caption">
-            <h2 class="element__place-name">Эльбрус</h2>
-            <button type="button" class="element__like-button"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img src="images/grid-elista.jpg" class="element__image" alt="Элиста">
-          <div class="element__caption">
-            <h2 class="element__place-name">Элиста</h2>
-            <button type="button" class="element__like-button"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img src="images/grid-ingushetija.jpg" class="element__image" alt="Ингушетия">
-          <div class="element__caption">
-            <h2 class="element__place-name">Ингушетия</h2>
-            <button type="button" class="element__like-button"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img src="images/grid-kandalaksha.jpg" class="element__image" alt="Кандалакша">
-          <div class="element__caption">
-            <h2 class="element__place-name">Кандалакша</h2>
-            <button type="button" class="element__like-button"></button>
-          </div>
-        </div>
+
       </section>
     </main>
 
@@ -92,6 +66,15 @@
     </footer>
   </div>
 
+  <template id="card">
+    <div class="element">
+      <img class="element__image">
+      <div class="element__caption">
+        <h2 class="element__place-name"></h2>
+        <button type="button" class="element__like-button"></button>
+      </div>
+    </div>
+  </template>
   <script src="scripts/index.js"></script>
 </body>
 </html>
