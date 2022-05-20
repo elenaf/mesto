@@ -29,7 +29,7 @@ const initialCards = [
 const cardTemplate = document.querySelector('#card').content; /* Шаблон одной карточки */
 const elements = document.querySelector('.elements'); /* Секция, в которую будем добавлять карточки */
 const element = cardTemplate.querySelector('.element'); /* div, в котором должна размещаться карточка */
-const popupShowImage = document.querySelector('.popup__image-show'); /* Попап для открытия большой картинки */
+const popupShowImage = document.querySelector('.popup_image-show'); /* Попап для открытия большой картинки */
 
 
 /* Функция рендеринга содержимого карточки */
@@ -71,8 +71,8 @@ initialCards.map(renderCards);
 const buttonEdit = document.querySelector('.profile__edit-button'); /* Кнопка "редактировать профиль" */
 const buttonAdd = document.querySelector('.profile__add-button'); /* Кнопка "добавить карточку" */
 
-const popupEditProfile = document.querySelector('.popup__profile-edit'); /* Попап "редактировать профиль" */
-const popupAddPlace = document.querySelector('.popup__place-add'); /* Попап "добавить карточку" */
+const popupEditProfile = document.querySelector('.popup_profile-edit'); /* Попап "редактировать профиль" */
+const popupAddPlace = document.querySelector('.popup_place-add'); /* Попап "добавить карточку" */
 
 const buttonCloseEditProfile = popupEditProfile.querySelector('.popup__close-button'); /* Кнопки закрытия */
 const buttonCloseAddPlace = popupAddPlace.querySelector('.popup__close-button');           /* попапов */
