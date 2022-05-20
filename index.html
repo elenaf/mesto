@@ -8,6 +8,36 @@
 </head>
 <body>
   <div class="page">
+
+    <header class="header">
+      <div class="header__logo"></div>
+    </header>
+
+    <main class="content">
+      <section class="profile">
+        <div class="profile__info">
+          <img class="profile__avatar" src="images/profile-image.jpg" alt="Фото профиля">
+          <div class="profile__person">
+            <div class="profile__person-name">
+              <h1 class="profile__person-text profile__title">Жак-Ив Кусто</h1>
+              <p class="profile__person-text profile__subtitle">Исследователь океана</p>
+            </div>
+            <button type="button" class="profile__edit-button"></button>
+          </div>
+        </div>
+        <button type="button" class="profile__add-button"></button>
+      </section>
+
+
+      <div class="elements">
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__copyright">&copy;&nbsp;2022 Mesto Russia</p>
+    </footer>
+
     <div class="popup popup__profile-edit">
       <div class="popup__container">
         <button type="button" class="popup__close-button"></button>
@@ -36,39 +66,22 @@
       </div>
     </div>
 
-    <header class="header">
-      <div class="header__logo"></div>
-    </header>
+    <div class="popup popup__image-show">
+      <div class="popup__image-container">
+        <button type="button" class="popup__close-button"></button>
+        <figure class="popup__content">
+          <img class="popup__image" alt="Место на карте" src="#">
+          <figcaption class="popup__image-caption"></figcaption>
+        </figure>
+      </div>
+    </div>
 
-    <main class="content">
-      <section class="profile">
-        <div class="profile__info">
-          <img class="profile__avatar" src="images/profile-image.jpg" alt="Фото профиля">
-          <div class="profile__person">
-            <div class="profile__person-name">
-              <h1 class="profile__person-text profile__title">Жак-Ив Кусто</h1>
-              <p class="profile__person-text profile__subtitle">Исследователь океана</p>
-            </div>
-            <button type="button" class="profile__edit-button"></button>
-          </div>
-        </div>
-        <button type="button" class="profile__add-button"></button>
-      </section>
-
-
-      <section class="elements">
-
-      </section>
-    </main>
-
-    <footer class="footer">
-      <p class="footer__copyright">&copy;&nbsp;2022 Mesto Russia</p>
-    </footer>
   </div>
 
   <template id="card">
     <div class="element">
       <img class="element__image">
+      <button type="button" class="element__trash-button"></button>
       <div class="element__caption">
         <h2 class="element__place-name"></h2>
         <button type="button" class="element__like-button"></button>
