@@ -13,8 +13,9 @@ const buttonAdd = document.querySelector('.profile__add-button'); /* Кнопк�
 const popupEditProfile = document.querySelector('.popup_profile-edit'); /* Попап "редактировать профиль" */
 const popupAddPlace = document.querySelector('.popup_place-add'); /* Попап "добавить карточку" */
 
-const buttonsClose = document.querySelectorAll('.popup__close-button'); /* Кнопки закрытия попапов */
-
+const buttonCloseEditProfile = popupEditProfile.querySelector('.popup__close-button'); /* Кнопки закрытия */
+const buttonCloseAddPlace = popupAddPlace.querySelector('.popup__close-button');           /* попапов */
+const buttonCloseImage = popupShowImage.querySelector('.popup__close-button');
 
 const formPopupEditProfile = popupEditProfile.querySelector('.popup__form');   /* Формы */
 const formPopupAddPlace = popupAddPlace.querySelector('.popup__form');        /* попапов */
@@ -111,11 +112,17 @@ buttonAdd.addEventListener('click', function () {
 
 /* Крестики в правом верхнем углу*/
 
-buttonsClose.forEach(function (button) {
-  button.addEventListener('click', function(evt) {
-    closePopup(evt.target.closest('.popup_opened'));
-  })
-})
+buttonCloseEditProfile.addEventListener('click', function (evt) {
+  closePopup(popupEditProfile);
+});
+
+buttonCloseAddPlace.addEventListener('click', function (evt) {
+  closePopup(popupAddPlace);
+});
+
+buttonCloseImage.addEventListener('click', function (evt) {
+  closePopup(popupShowImage);
+});
 
 /* Сохранить и закрыть */
 function formSubmitHandler (evt) {
