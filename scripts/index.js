@@ -112,15 +112,15 @@ buttonAdd.addEventListener('click', function () {
 
 /* Крестики в правом верхнем углу*/
 
-buttonCloseEditProfile.addEventListener('click', function (evt) {
+buttonCloseEditProfile.addEventListener('click', function () {
   closePopup(popupEditProfile);
 });
 
-buttonCloseAddPlace.addEventListener('click', function (evt) {
+buttonCloseAddPlace.addEventListener('click', function () {
   closePopup(popupAddPlace);
 });
 
-buttonCloseImage.addEventListener('click', function (evt) {
+buttonCloseImage.addEventListener('click', function () {
   closePopup(popupShowImage);
 });
 
