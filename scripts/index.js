@@ -54,8 +54,9 @@ function createCard(cardContent) {
   /* Открытие попапа с большой картинкой при клике на картинку из карточки */
   cardElement.querySelector('.element__image').addEventListener('click', function(evt) {
     openPopup(popupShowImage);
-    popupShowImage.querySelector('.popup__image').src = `${evt.target.src}`;
-    popupShowImage.querySelector('.popup__image').alt = `${evt.target.alt}`;
+    const popupImage = popupShowImage.querySelector('.popup__image');
+    popupImage.src = `${evt.target.src}`;
+    popupImage.alt = `${evt.target.alt}`;
     popupShowImage.querySelector('.popup__image-caption').textContent = `${evt.target.alt}`;
   });
 
@@ -109,7 +110,7 @@ function openPopup(popup) {
   resetForm(popup); // не оставляем введенные значения при открытии попапа
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupWithEsc); // добавляем возможность закрыть попап кнопкой Esc
-  popup.addEventListener('click', closeWithOverlay); // добавляем возможность закрыть попап кликом по оверлею
+  popup.addEventListener('mousedown', closeWithOverlay); // добавляем возможность закрыть попап кликом по оверлею
 }
 
 /* Закрыть попап */
@@ -162,17 +163,17 @@ const closeWithOverlay = (evt) => {
 }
 
 /* Сохранить и закрыть */
-function formSubmitHandler (evt) {
+function submitProfileForm (evt) {
   evt.preventDefault();
   setProfileData(popupName, popupOccupation);
   closePopup(popupEditProfile);
 }
 
 /* Кнопка "Сохранить" */
-formPopupEditProfile.addEventListener('submit', formSubmitHandler);
+formPopupEditProfile.addEventListener('submit', submitProfileForm);
 
 /* Создать новую карточку, очистить поля и закрыть */
-function formCreateHandler (evt) {
+function createNewCard (evt) {
   evt.preventDefault();
   const newCard = {
       name: `${popupPlaceName.value}`,
@@ -184,5 +185,5 @@ function formCreateHandler (evt) {
 }
 
 /* Кнопка "Создать" */
-formPopupAddPlace.addEventListener('submit', formCreateHandler);
+formPopupAddPlace.addEventListener('submit', createNewCard);
 
