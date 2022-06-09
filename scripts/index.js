@@ -89,14 +89,35 @@ function setProfileData (popupData1, popupData2) {
   profileSubtitle.textContent = popupData2.value;
 }
 
+/* Функция для сброса форм и ошибок в них в тех попапах, где они есть */
+function resetForm(popup) {
+  const popupForm = popup.querySelector('.popup__form');
+  if (popupForm !== null) {
+    popupForm.reset();
+    const popupInputs = Array.from(popupForm.querySelectorAll(`.${formSettingsObject.inputErrorClass}`));
+    popupInputs.forEach((popupInput) => {
+      hideInputError(popupForm, popupInput, formSettingsObject); // validate.js
+    })
+    const submitButton = popupForm.querySelector(formSettingsObject.submitButtonSelector);;
+    submitButton.classList.add(formSettingsObject.inactiveButtonClass);
+    submitButton.setAttribute('disabled', true);
+  }
+}
+
 /* Открытие попапа */
 function openPopup(popup) {
+  resetForm(popup); // не оставляем введенные значения при открытии попапа
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupWithEsc); // добавляем возможность закрыть попап кнопкой Esc
+  popup.addEventListener('click', closeWithOverlay); // добавляем возможность закрыть попап кликом по оверлею
 }
 
 /* Закрыть попап */
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupWithEsc); // снимаем слушатель Esc со всего документа
+  popup.removeEventListener('click', closeWithOverlay); // снимаем слушатель клика по оверлею
+
 }
 
 /* Кнопка "редактировать" */
@@ -123,6 +144,22 @@ buttonCloseAddPlace.addEventListener('click', function () {
 buttonCloseImage.addEventListener('click', function () {
   closePopup(popupShowImage);
 });
+
+/* Закрытие попапа кнопкой Esc */
+const closePopupWithEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+      closePopup(popup);
+  }
+}
+
+/* Закрытие попапа кликом по затемненной области */
+const closeWithOverlay = (evt) => {
+  if (evt.target === evt.currentTarget) {
+    const popup = document.querySelector('.popup_opened');
+      closePopup(popup);
+    }
+}
 
 /* Сохранить и закрыть */
 function formSubmitHandler (evt) {
