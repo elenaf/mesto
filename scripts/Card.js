@@ -1,4 +1,4 @@
-import {openPopup, popupShowImage} from './index.js';
+import {openPopup, popupShowImage} from './utils.js';
 
 export class Card {
   constructor(cardContent, cardTemplateSelector) {
@@ -15,6 +15,7 @@ export class Card {
   // Удалить карточку
   _deleteCard = () => {
     this._cardElement.remove();
+    this._cardElement = null;
   }
 
   // Заполнить содержимое карточки
@@ -38,11 +39,11 @@ export class Card {
 
   // Метод обработки картинки при ее открытии
   _openPopup = () => {
-    openPopup(popupShowImage);
     const popupImage = popupShowImage.querySelector('.popup__image');
     popupImage.src = `${this._cardContent.link}`;
     popupImage.alt = `${this._cardContent.name}`;
     popupShowImage.querySelector('.popup__image-caption').textContent = `${this._cardContent.name}`;;
+    openPopup(popupShowImage);
   }
 
   // Создать карточку

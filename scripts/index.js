@@ -1,5 +1,7 @@
 import {FormValidator} from './FormValidator.js'
 import { Card } from './Card.js';
+import {initialCards} from './cards.js';
+import { popupShowImage, openPopup, closePopup } from './utils.js';
 
 const formSettingsObject = {
   formSelector: '.popup__form',
@@ -10,38 +12,8 @@ const formSettingsObject = {
   errorClass: 'popup__error_visible'
 }
 
-/* --- Добавляем шесть карточек "из коробки" --- */
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const cardTemplate = document.querySelector('#card').content; /* Шаблон одной карточки */
 const elements = document.querySelector('.elements'); /* Секция, в которую будем добавлять карточки */
-const element = cardTemplate.querySelector('.element'); /* div, в котором должна размещаться карточка */
-export const popupShowImage = document.querySelector('.popup_image-show'); /* Попап для открытия большой картинки */
 
 /* Формы добавления карточки и редактирования информации профиля */
 
@@ -71,11 +43,11 @@ const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 
 /* Включение валидации форм */
-const formEditProfile = new FormValidator(formSettingsObject, formPopupEditProfile);
-formEditProfile.enableValidation();
+const formEditProfileValidator = new FormValidator(formSettingsObject, formPopupEditProfile);
+const formAddPlaceValidator = new FormValidator(formSettingsObject, formPopupAddPlace);
 
-const formAddPlace = new FormValidator(formSettingsObject, formPopupAddPlace);
-formAddPlace.enableValidation();
+formEditProfileValidator.enableValidation();
+formAddPlaceValidator.enableValidation();
 
 /* Функция рендеринга содержимого карточки */
 function renderCards(card, needToPrepend = false) {
@@ -105,40 +77,10 @@ function setProfileData (popupData1, popupData2) {
   profileSubtitle.textContent = popupData2.value;
 }
 
-/* Функция для сброса форм и ошибок в них в тех попапах, где они есть */
-function resetForm(popup) {
-  const popupForm = popup.querySelector('.popup__form');
-  const popupFormValidation = new FormValidator(formSettingsObject, popupForm);
-  if (popupForm !== null) {
-    popupForm.reset();
-    const popupInputs = Array.from(popupForm.querySelectorAll(`.${formSettingsObject.inputErrorClass}`));
-    popupInputs.forEach((popupInput) => {
-      popupFormValidation.hideInputError(popupInput); // FormValidator.js
-    })
-    const submitButton = popupForm.querySelector(formSettingsObject.submitButtonSelector);;
-    submitButton.classList.add(formSettingsObject.inactiveButtonClass);
-    submitButton.setAttribute('disabled', true);
-  }
-}
-
-/* Открытие попапа */
-export function openPopup(popup) {
-  resetForm(popup); // не оставляем введенные значения при открытии попапа
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupWithEsc); // добавляем возможность закрыть попап кнопкой Esc
-  popup.addEventListener('mousedown', closeWithOverlay); // добавляем возможность закрыть попап кликом по оверлею
-}
-
-/* Закрыть попап */
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupWithEsc); // снимаем слушатель Esc со всего документа
-  popup.removeEventListener('click', closeWithOverlay); // снимаем слушатель клика по оверлею
-
-}
-
 /* Кнопка "редактировать" */
 buttonEdit.addEventListener('click', function () {
+  formEditProfileValidator.resetFormErrors();
+  formEditProfileValidator.setButtonState();
   openPopup(popupEditProfile);
   setPopupFields(profileTitle, profileSubtitle);
 
@@ -146,6 +88,7 @@ buttonEdit.addEventListener('click', function () {
 
 /* Кнопка "+" */
 buttonAdd.addEventListener('click', function () {
+  formAddPlaceValidator.setButtonState();
   openPopup(popupAddPlace);
 });
 
@@ -163,22 +106,6 @@ buttonCloseImage.addEventListener('click', function () {
   closePopup(popupShowImage);
 });
 
-/* Закрытие попапа кнопкой Esc */
-const closePopupWithEsc = (evt) => {
-  if (evt.key === 'Escape') {
-    const popup = document.querySelector('.popup_opened');
-      closePopup(popup);
-  }
-}
-
-/* Закрытие попапа кликом по затемненной области */
-const closeWithOverlay = (evt) => {
-  if (evt.target === evt.currentTarget) {
-    const popup = document.querySelector('.popup_opened');
-      closePopup(popup);
-    }
-}
-
 /* Сохранить и закрыть */
 function submitProfileForm (evt) {
   evt.preventDefault();
@@ -193,8 +120,8 @@ formPopupEditProfile.addEventListener('submit', submitProfileForm);
 function createNewCard (evt) {
   evt.preventDefault();
   const newCard = {
-      name: `${popupPlaceName.value}`,
-      link: `${popupPlaceLink.value}`
+      name: popupPlaceName.value,
+      link: popupPlaceLink.value
     };
   renderCards(newCard, true);
   this.reset();

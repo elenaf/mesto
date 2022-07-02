@@ -17,41 +17,51 @@ export class FormValidator {
 /* Установка обработчиков на инпуты */
 _setEventListeners() {
   // Найти все поля формы и сделать из них массив
-  const inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
+  this._inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
 
   // Найти кнопку сабмита формы
-  const submitButton = this._form.querySelector(this._config.submitButtonSelector);
+  this._submitButton = this._form.querySelector(this._config.submitButtonSelector);
 
   // Устанавливаем начальное состояние кнопки сабмита
-  this._setButtonState(inputList, submitButton);
+  this.setButtonState();
 
   // Проходимся по массиву инпутов, каждому вешаем слушатель ввода,
   // в реальном времени следим за состоянием кнопки сабмита
-  inputList.forEach((inputElement) => {
+  this._inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       this._isValid(inputElement);
-      this._setButtonState(inputList, submitButton);
+      this.setButtonState();
     });
   });
 };
 
 /* Определяем состояние кнопки сабмит */
-_setButtonState(inputList, submitButton) {
+setButtonState() {
   // Если есть невалидные инпуты в форме, кнопка становится недоступна
-  if (this._hasInvalid(inputList)) {
-    submitButton.classList.add(this._config.inactiveButtonClass);
-    submitButton.setAttribute('disabled', true);
+  if (this._hasInvalid()) {
+    this._disableSubmitButton();
   } else {
-    submitButton.classList.remove(this._config.inactiveButtonClass);
-    submitButton.removeAttribute('disabled');
+    this._enableSubmitButton();
   }
 }
 
 /* Проверка наличия невалидных инпутов в форме */
-_hasInvalid(inputList) {
-  return inputList.some((inputElement) => {
+_hasInvalid() {
+  return this._inputList.some((inputElement) => {
     return !(inputElement.validity.valid);
   })
+}
+
+// Сделать кнопку сабмит неактивной
+_disableSubmitButton() {
+  this._submitButton.classList.add(this._config.inactiveButtonClass);
+  this._submitButton.setAttribute('disabled', true);
+}
+
+// Сделать кнопку сабмит активной
+_enableSubmitButton() {
+  this._submitButton.classList.remove(this._config.inactiveButtonClass);
+  this._submitButton.removeAttribute('disabled');
 }
 
 /* Проверка валидности инпута */
@@ -78,6 +88,14 @@ hideInputError(inputElement) {
   inputError.textContent = '';
   inputError.classList.remove(this._config.errorClass);
 };
+
+/* Сбросить ошибки в форме */
+resetFormErrors() {
+  const popupInputs = Array.from(this._form.querySelectorAll(`.${this._config.inputErrorClass}`));
+  popupInputs.forEach((popupInput) => {
+    this.hideInputError(popupInput); // FormValidator.js
+  });
+}
 
 } // class FormValidator
 
