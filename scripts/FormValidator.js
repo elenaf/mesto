@@ -69,7 +69,7 @@ _isValid(inputElement) {
   if (!inputElement.validity.valid) {
     this._showInputError(inputElement, inputElement.validationMessage);
   } else {
-    this.hideInputError(inputElement);
+    this._hideInputError(inputElement);
   }
 };
 
@@ -82,7 +82,7 @@ _showInputError(inputElement, errorMessage) {
 };
 
 /* Скрытие ошибки валидации, используется в т.ч. для ресета форм и ошибок при открытии */
-hideInputError(inputElement) {
+_hideInputError(inputElement) {
   const inputError = this._form.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.remove(this._config.inputErrorClass);
   inputError.textContent = '';
@@ -93,7 +93,7 @@ hideInputError(inputElement) {
 resetFormErrors() {
   const popupInputs = Array.from(this._form.querySelectorAll(`.${this._config.inputErrorClass}`));
   popupInputs.forEach((popupInput) => {
-    this.hideInputError(popupInput); // FormValidator.js
+    this._hideInputError(popupInput);
   });
 }
 
