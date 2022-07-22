@@ -1,10 +1,11 @@
 import {openPopup, popupShowImage} from './utils.js';
 
 export class Card {
-  constructor(cardContent, cardTemplateSelector) {
+  constructor(cardContent, cardTemplateSelector, handleCardClick) {
     this._cardContent = cardContent;
-    this._cardTemplateSelector = cardTemplateSelector;
-    this._cardTemplateElement = cardTemplateSelector.querySelector('.element');
+    this._handleCardClick = handleCardClick; // логика открытия попапа
+    this._cardTemplateSelector = cardTemplateSelector; // содержимое тега template
+    this._cardTemplateElement = cardTemplateSelector.querySelector('.element'); // див-контейнер с разметкой карточки
   }
 
   // Переключить кнопку лайка
@@ -20,9 +21,9 @@ export class Card {
 
   // Заполнить содержимое карточки
   _fillCardContent = () => {
-    this._elementImage.src = `${this._cardContent.link}`;
-    this._elementImage.alt = `${this._cardContent.name}`;
-    this._elementPlaceName.textContent = `${this._cardContent.name}`;
+    this._elementImage.src = `${this._cardContent.picture_link}`;
+    this._elementImage.alt = `${this._cardContent.place_name}`;
+    this._elementPlaceName.textContent = `${this._cardContent.place_name}`;
   }
 
   // Установить слушатели событий
@@ -34,21 +35,19 @@ export class Card {
     this._trashButton.addEventListener('click', this._deleteCard);
 
     /* Обработчик увеличения картинки по клику */
-    this._cardElement.querySelector('.element__image').addEventListener('click', () => this._openPopup());
+    this._cardElement.querySelector('.element__image').addEventListener('click', () => this._handleCardClick());
   }
 
-  // Метод обработки картинки при ее открытии
-  _openPopup = () => {
-    const popupImage = popupShowImage.querySelector('.popup__image');
-    popupImage.src = `${this._cardContent.link}`;
-    popupImage.alt = `${this._cardContent.name}`;
-    popupShowImage.querySelector('.popup__image-caption').textContent = `${this._cardContent.name}`;;
-    openPopup(popupShowImage);
+  // Клонируем див-контейнер с разметкой из шаблона для дальнейшего наполнения
+  _getTemplate() {
+    const cardElement = this._cardTemplateElement.cloneNode(true);
+    return cardElement;
   }
 
   // Создать карточку
   createCard() {
-    this._cardElement = this._cardTemplateElement.cloneNode(true);
+    this._cardElement = this._getTemplate(); //клон дива element из шаблона
+
     this._likeButton = this._cardElement.querySelector('.element__like-button');
     this._trashButton = this._cardElement.querySelector('.element__trash-button');
     this._elementImage = this._cardElement.querySelector('.element__image');
