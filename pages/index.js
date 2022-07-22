@@ -61,8 +61,8 @@ formAddPlaceValidator.enableValidation();
 const userInfo = new UserInfo({
   /* userNameSelector: popupName,
   userInfoSelector: popupOccupation */
-  userNameSelector: '.popup__input_field_name',
-  userInfoSelector: '.popup__input_field_occupation'
+  userNameSelector: '.profile__title',
+  userInfoSelector: '.profile__subtitle'
 });
 
 // создаем экземпляр попапа для редактирования данных
@@ -123,9 +123,16 @@ defaultCards.renderItems();
 buttonEdit.addEventListener('click', () => {
   formEditProfileValidator.resetFormErrors();
   formEditProfileValidator.setButtonState();
+
+  const userValues = userInfo.getUserInfo();
+  popupName.value = userValues.name;
+  popupOccupation.value = userValues.info;
+
+
+
   popupUserEdit.open();
 
-  userInfo.getUserInfo();
+
 })
 
 

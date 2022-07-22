@@ -3,8 +3,8 @@ export class UserInfo {
     /* this._userName = document.querySelector(userNameSelector);
     this._userInfo = document.querySelector(userInfoSelector); */
     this._userName = document.querySelector(userNameSelector),
-    this._userInfo = userInfoSelector
-    console.log(this._userName.textContent);
+    this._userInfo = document.querySelector(userInfoSelector)
+    console.log(this._userName);
   }
 
   // Берет данные из профиля и сохраняет их в объект user
