@@ -47,18 +47,25 @@ popupUserEdit.setEventListeners();
 // Создаем экземпляр попапа для показа большой картинки
 const popupWithImage = new PopupWithImage(popupImageShow);
 
+// Функция создания карточки
+function createCardElement(item) {
+  const newCard = new Card(
+    item,
+    cardTemplate,
+    () => {
+      popupWithImage.setEventListeners();
+      popupWithImage.open(item);
+    });
+
+  const cardElement = newCard.createCard();
+  return cardElement;
+}
+
 /* Создаем экземпляр Section, куда сразу размещаем дефолтные карточки */
 const sectionForCards = new Section({
   items: initialCards,
   renderer: (item) => {
-    const newCard = new Card(
-      item,
-      cardTemplate,
-      () => {
-        popupWithImage.setEventListeners();
-        popupWithImage.open(item);
-      });
-    const cardElement = newCard.createCard();
+    const cardElement = createCardElement(item);
     sectionForCards.addItem(cardElement);
   },
 },
@@ -69,14 +76,8 @@ sectionForCards.renderItems();
 const popupCardAdd = new PopupWithForm({
   popupSelector: popupAddPlace,
   handleFormSubmit: (formValues) => {
-    const newCard = new Card(
-      formValues,
-      cardTemplate,
-      () => {
-        popupWithImage.setEventListeners();
-        popupWithImage.open(formValues);
-      });
-    sectionForCards.addItem(newCard.createCard());
+    const newCard = createCardElement(formValues);
+    sectionForCards.addItem(newCard);
     popupCardAdd.close();
   }
 });
@@ -86,17 +87,15 @@ popupCardAdd.setEventListeners();
 
 /* Кнопка "редактировать" */
 buttonEdit.addEventListener('click', () => {
-  formEditProfileValidator.resetFormErrors();
-  formEditProfileValidator.setButtonState();
+  formEditProfileValidator.resetValidation();
 
-  const userValues = userInfo.getUserInfo();
-  popupName.value = userValues.name;
-  popupOccupation.value = userValues.info;
+  popupUserEdit.setInputValues(userInfo.getUserInfo());
+
   popupUserEdit.open();
 })
 
 /* Кнопка "добавить" */
 buttonAdd.addEventListener('click', () => {
-  formAddPlaceValidator.setButtonState();
+  formAddPlaceValidator.resetValidation();
   popupCardAdd.open();
 });

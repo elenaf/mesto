@@ -23,20 +23,20 @@ _setEventListeners() {
   this._submitButton = this._form.querySelector(this._config.submitButtonSelector);
 
   // Устанавливаем начальное состояние кнопки сабмита
-  this.setButtonState();
+  this._setButtonState();
 
   // Проходимся по массиву инпутов, каждому вешаем слушатель ввода,
   // в реальном времени следим за состоянием кнопки сабмита
   this._inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
       this._isValid(inputElement);
-      this.setButtonState();
+      this._setButtonState();
     });
   });
 };
 
 /* Определяем состояние кнопки сабмит */
-setButtonState() {
+_setButtonState() {
   // Если есть невалидные инпуты в форме, кнопка становится недоступна
   if (this._hasInvalid()) {
     this._disableSubmitButton();
@@ -90,12 +90,19 @@ _hideInputError(inputElement) {
 };
 
 /* Сбросить ошибки в форме */
-resetFormErrors() {
-  const popupInputs = Array.from(this._form.querySelectorAll(`.${this._config.inputErrorClass}`));
-  popupInputs.forEach((popupInput) => {
+_resetFormErrors() {
+  this._inputList.forEach((popupInput) => {
     this._hideInputError(popupInput);
   });
 }
+
+/* Сброс валидации */
+resetValidation() {
+  this._setButtonState();
+  this._resetFormErrors();
+}
+
+
 
 } // class FormValidator
 

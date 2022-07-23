@@ -1,6 +1,6 @@
 export class Popup {
   constructor(popupSelector) {
-    this._popup = popupSelector; //выбрали попап по селектору
+    this._popup = document.querySelector(popupSelector); //выбрали попап по селектору
   }
 
   _handleEscClose = (evt) => {
@@ -18,7 +18,7 @@ export class Popup {
   // слушатель кликов по крестикам
   setEventListeners() {
     this._closeButton = this._popup.querySelector('.popup__close-button');
-    this._closeButton.addEventListener('click', this.close);
+    this._closeButton.addEventListener('click', () => this.close());
   }
 
   open() {
@@ -28,7 +28,7 @@ export class Popup {
 
   }
 
-  close = () => {
+  close() {
     this._popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', this._handleEscClose); // снимаем слушатель Esc со всего документа
     this._popup.removeEventListener('mousedown', this._handleOverlayClose); // снимаем слушатель клика по оверлею

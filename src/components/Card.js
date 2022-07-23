@@ -1,9 +1,9 @@
 export class Card {
-  constructor(cardContent, cardTemplateSelector, handleCardClick) {
+  constructor(cardContent, cardTemplate, handleCardClick) {
     this._cardContent = cardContent;
     this._handleCardClick = handleCardClick; // логика открытия попапа
-    this._cardTemplateSelector = cardTemplateSelector; // содержимое тега template
-    this._cardTemplateElement = cardTemplateSelector.querySelector('.element'); // див-контейнер с разметкой карточки
+    this._cardTemplate = cardTemplate; // содержимое тега template
+    this._cardTemplateElement = cardTemplate.querySelector('.element'); // див-контейнер с разметкой карточки
   }
 
   // Переключить кнопку лайка
