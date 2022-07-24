@@ -46,6 +46,7 @@ popupUserEdit.setEventListeners();
 
 // Создаем экземпляр попапа для показа большой картинки
 const popupWithImage = new PopupWithImage(popupImageShow);
+popupWithImage.setEventListeners();
 
 // Функция создания карточки
 function createCardElement(item) {
@@ -53,7 +54,6 @@ function createCardElement(item) {
     item,
     cardTemplate,
     () => {
-      popupWithImage.setEventListeners();
       popupWithImage.open(item);
     });
 
