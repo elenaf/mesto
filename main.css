@@ -7,7 +7,7 @@
 .profile{align-items:center;display:flex;justify-content:space-between;margin:40px auto 50px;padding:0}@media screen and (max-width:900px){.profile{margin:42px 19px 36px}}@media screen and (max-width:710px){.profile{flex-direction:column}}
 .profile__avatar-container{height:120px;position:relative;width:120px}
 .profile__avatar{border:0;border-radius:50%;height:120px;-o-object-fit:cover;object-fit:cover;position:relative;width:120px}
-.profile__avatar-overlay{background-color:transparent;background-color:rgba(0,0,0,.8);background-image:url(a086f758840ae814ecde.svg);background-position:50%;background-repeat:no-repeat;background-size:26px 26px;border:0;border-radius:50%;box-sizing:content-box;height:120px;left:0;-o-object-fit:contain;object-fit:contain;opacity:0;padding:0;position:absolute;top:0;width:120px}.profile__avatar-overlay:hover{opacity:1}
+.profile__avatar-overlay{background-color:rgba(0,0,0,.8);background-image:url(a086f758840ae814ecde.svg);background-position:50%;background-repeat:no-repeat;background-size:26px 26px;border:0;border-radius:50%;box-sizing:content-box;cursor:pointer;height:120px;left:0;-o-object-fit:contain;object-fit:contain;opacity:0;padding:0;position:absolute;top:0;width:120px}.profile__avatar-overlay:hover{opacity:1}
 .profile__info{align-items:center;display:flex;gap:30px;justify-content:space-between}@media screen and (max-width:710px){.profile__info{flex-direction:column;gap:26px;margin-bottom:36px;text-align:center}}
 .profile__person{align-items:baseline;display:grid;gap:18px;grid-template-areas:"name button"}@media screen and (max-width:710px){.profile__person{gap:10px;grid-template-areas:". name button";grid-template-columns:1fr 3fr 1fr}}
 .profile__person-name{grid-area:name}
