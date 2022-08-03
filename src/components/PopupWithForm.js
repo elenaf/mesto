@@ -6,6 +6,8 @@ export class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._form = this._popup.querySelector('.popup__form');
     this._inputList = this._form.querySelectorAll('.popup__input');
+    this._submitBtn = this._form.querySelector('.popup__save-button');
+    this._submitBtnInitialText = this._submitBtn.textContent;
   }
 
   // Собираем данные, которые вводятся в поля формы
@@ -19,10 +21,19 @@ export class PopupWithForm extends Popup {
     return this._formValues;
   }
 
+  renderLoading(isLoading = false) {
+    if (isLoading) {
+      this._submitBtn.textContent = 'Сохранение...'
+    } else {
+      this._submitBtn.textContent = this._submitBtnInitialText;
+    }
+  }
+
   setEventListeners() {
     super.setEventListeners();
 
     this._form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
       this.close();
     });

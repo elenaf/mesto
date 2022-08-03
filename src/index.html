@@ -15,11 +15,14 @@
     <main class="content">
       <section class="profile">
         <div class="profile__info">
-          <img class="profile__avatar" src="<%=require('./images/profile-image.jpg')%>" alt="Фото профиля">
+          <div class="profile__avatar-container">
+            <img class="profile__avatar" src="#" alt="Фото профиля">
+            <button type="button" class="profile__avatar-overlay"></button>
+          </div>
           <div class="profile__person">
             <div class="profile__person-name">
-              <h1 class="profile__person-text profile__title">Жак-Ив Кусто</h1>
-              <p class="profile__person-text profile__subtitle">Исследователь океана</p>
+              <h1 class="profile__person-text profile__title">...</h1>
+              <p class="profile__person-text profile__subtitle"></p>
             </div>
             <button type="button" class="profile__edit-button"></button>
           </div>
@@ -48,7 +51,7 @@
                 <span id="name-input-error" class="popup__error"></span>
               </label>
               <label class="popup__label">
-                <input id="occupation-input" type="text" placeholder="Род занятий" class="popup__input popup__input_field_occupation" name="info" required minlength="2" maxlength="200"  value=" ">
+                <input id="occupation-input" type="text" placeholder="Род занятий" class="popup__input popup__input_field_occupation" name="about" required minlength="2" maxlength="200"  value=" ">
                 <span id="occupation-input-error" class="popup__error"></span>
               </label>
             </fieldset>
@@ -64,15 +67,41 @@
             <h2 class="popup__title">Новое место</h2>
             <fieldset class="popup__fields">
               <label class="popup__label">
-                <input id="place-name-input" type="text" placeholder="Название" class="popup__input popup__input_field_place-name" name="place_name" required minlength="2" maxlength="30">
+                <input id="place-name-input" type="text" placeholder="Название" class="popup__input popup__input_field_place-name" name="name" required minlength="2" maxlength="30">
                 <span id="place-name-input-error" class="popup__error"></span>
               </label>
               <label class="popup__label">
-                <input id="picture-link-input" type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_field_picture-link" name="picture_link" required>
+                <input id="picture-link-input" type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_field_picture-link" name="link" required>
                 <span id="picture-link-input-error" class="popup__error"></span>
               </label>
             </fieldset>
             <button type="submit" class="popup__save-button">Создать</button>
+          </form>
+      </div>
+    </div>
+
+    <div class="popup popup_avatar-update">
+      <div class="popup__container">
+        <button type="button" class="popup__close-button"></button>
+          <form class="popup__form" name="avatar-update" novalidate>
+            <h2 class="popup__title">Обновить аватар</h2>
+            <fieldset class="popup__fields">
+              <label class="popup__label">
+                <input id="avatar-link-input" type="url" placeholder="Ссылка на новый аватар" class="popup__input popup__input_field_picture-link" name="avatar" required>
+                <span id="avatar-link-input-error" class="popup__error"></span>
+              </label>
+            </fieldset>
+            <button type="submit" class="popup__save-button">Сохранить</button>
+          </form>
+      </div>
+    </div>
+
+    <div class="popup popup_remove-submit">
+      <div class="popup__container">
+        <button type="button" class="popup__close-button"></button>
+          <form class="popup__form" name="card-removing" novalidate>
+            <h2 class="popup__title">Вы уверены?</h2>
+            <button type="submit" class="popup__save-button">Да</button>
           </form>
       </div>
     </div>
@@ -95,7 +124,10 @@
       <button type="button" class="element__trash-button"></button>
       <div class="element__caption">
         <h2 class="element__place-name"></h2>
-        <button type="button" class="element__like-button"></button>
+        <div class="element__like">
+          <button type="button" class="element__like-button"></button>
+          <div class="element__like-amount"></div>
+        </div>
       </div>
     </div>
   </template>
