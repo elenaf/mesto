@@ -58,8 +58,6 @@ const user = api.getUserInfo();
 
 const promises = [cards, user];
 
-//let userId = '';
-
 Promise.all(promises)
 .then((data) => {
   const [ cardsData, userData ] = data;
