@@ -30,7 +30,7 @@ export class UserInfo {
 
   }
 
-  getUserId(userId) {
+  setUserId(userId) {
     this.id = userId;
   }
 

@@ -16,7 +16,7 @@ export const configRequest = {
 }
 
 export const cardTemplate = document.querySelector('#card').content; /* Шаблон одной карточки */
-export const cardsContainer = document.querySelector('.elements'); /* Секция, в которую будем добавлять карточки */
+export const cardsContainerSelector = '.elements'; /* Секция, в которую будем добавлять карточки */
 
 export const buttonEdit = document.querySelector('.profile__edit-button'); /* Кнопка "редактировать профиль" */
 export const buttonAdd = document.querySelector('.profile__add-button'); /* Кнопка "добавить карточку" */

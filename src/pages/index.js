@@ -3,7 +3,7 @@ import {
   formSettingsObject,
   configRequest,
   cardTemplate, /* Шаблон одной карточки */
-  cardsContainer, /* Секция, в которую будем добавлять карточки */
+  cardsContainerSelector, /* Секция, в которую будем добавлять карточки */
   buttonEdit, /* Кнопка "редактировать профиль" */
   buttonAdd, /* Кнопка "добавить карточку" */
   buttonUpdate, /* Кнопка "поменять аватар" */
@@ -43,7 +43,7 @@ const sectionForCards = new Section({
       sectionForCards.addItem(cardElement);
     },
   },
-  cardsContainer);
+  cardsContainerSelector);
 
 // Создаем экземпляр Userinfo
 const userInfo = new UserInfo({
@@ -65,7 +65,7 @@ Promise.all(promises)
   const [ cardsData, userData ] = data;
 
   userInfo.setUserInfo(userData); // Получаем данные профиля пользователя с сервера
-  userInfo.getUserId(userData._id);
+  userInfo.setUserId(userData._id);
 
   userInfo.setUserAvatar(userData); // Грузим аватар
 
@@ -84,6 +84,7 @@ const popupUserEdit = new PopupWithForm({
     api.editProfile(profileInfoData)
     .then((data) => {
       userInfo.setUserInfo(data);
+      popupUserEdit.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
@@ -123,13 +124,12 @@ function createCardElement(item) {
 
     },
     handleTrashClick: (card) => {
-      console.log(card)
       popupRemoveCardSubmit.open();
       popupRemoveCardSubmit.setSubmitHandler(() => {
-        debugger
         api.deleteCard(card._cardContent._id)
         .then((data) => {
           card.deleteCard();
+          popupRemoveCardSubmit.close();
         })
         .catch((err) => console.log(err))
       })
@@ -148,6 +148,7 @@ const popupAvatarUpdate = new PopupWithForm({
     api.updateAvatar(formValues)
     .then(() => {
       userInfo.setUserAvatar(formValues);
+      popupAvatarUpdate.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {

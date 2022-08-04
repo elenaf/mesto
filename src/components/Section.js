@@ -1,7 +1,7 @@
 export class Section {
   constructor({ renderer }, container) {
     this._renderer = renderer; // передается при создании экземпляра класса
-    this._container = container;
+    this._container = document.querySelector(container);
   }
 
   // отрисовка всех элементов

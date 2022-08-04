@@ -5,11 +5,6 @@ export class FormValidator {
   }
 
   enableValidation() {
-  // В форме отменяем действие по умолчанию при сабмите
-  this._form.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
-
     // Вешаем слушатели на инпуты формы
     this._setEventListeners();
   }
